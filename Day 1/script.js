@@ -1031,3 +1031,8 @@ for(let i = 0; i < arr1.length; i++){
 }
 
 console.log(answer1)
+
+arr1.forEach(number => {
+    
+    
+});
