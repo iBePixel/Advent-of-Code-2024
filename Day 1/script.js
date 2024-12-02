@@ -1013,3 +1013,21 @@ split.forEach(value => {
 });
 
 
+arr1.sort()
+arr2.sort()
+
+let answer1 = 0;
+let distance
+
+for(let i = 0; i < arr1.length; i++){
+    if(arr1[i] > arr2[i]){
+        distance = arr1[i] - arr2[i]
+        answer += distance
+        }
+    else {
+        distance = arr2[i] - arr1[i]
+        answer += distance
+    }
+}
+
+console.log(answer1)
