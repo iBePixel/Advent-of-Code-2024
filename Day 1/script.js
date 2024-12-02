@@ -1000,4 +1000,16 @@ const input = `63721   98916
 43972   20620`
 
 
-console.log(input)
+
+
+let split = input.split(/\r?\n/g);
+
+arr1 = []
+arr2 = []
+
+split.forEach(value => {
+    arr1.push(value.slice(0, 5))
+    arr2.push(value.slice(-5,))
+});
+
+
