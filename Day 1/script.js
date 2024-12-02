@@ -1000,9 +1000,10 @@ const input = `63721   98916
 43972   20620`
 
 
-
-
 let split = input.split(/\r?\n/g);
+let answer1 = 0;
+let answer2 = 0;
+let distance
 
 arr1 = []
 arr2 = []
@@ -1012,13 +1013,8 @@ split.forEach(value => {
     arr2.push(value.slice(-5,))
 });
 
-
 arr1.sort()
 arr2.sort()
-
-let answer1 = 0;
-let answer2 = 0;
-let distance
 
 for(let i = 0; i < arr1.length; i++){
     if(arr1[i] > arr2[i]){
@@ -1031,12 +1027,7 @@ for(let i = 0; i < arr1.length; i++){
     }
 }
 
-console.log(answer1)
 
-arr1.forEach(number => {
-    
-    
-});
 
 arr1.forEach(num => {
     let occ = 0;
@@ -1048,4 +1039,5 @@ arr1.forEach(num => {
     answer2 += num * occ;
 });
 
+console.log(`Answer 1 is ${answer1}`)
 console.log(`Answer 2 is ${answer2}`)
