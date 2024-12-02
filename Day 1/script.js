@@ -1017,16 +1017,17 @@ arr1.sort()
 arr2.sort()
 
 let answer1 = 0;
+let answer2 = 0;
 let distance
 
 for(let i = 0; i < arr1.length; i++){
     if(arr1[i] > arr2[i]){
         distance = arr1[i] - arr2[i]
-        answer += distance
+        answer1 += distance
         }
     else {
         distance = arr2[i] - arr1[i]
-        answer += distance
+        answer1 += distance
     }
 }
 
@@ -1036,3 +1037,15 @@ arr1.forEach(number => {
     
     
 });
+
+arr1.forEach(num => {
+    let occ = 0;
+    for (let g = 0; arr2[g] <= num; g++){
+        if (arr2[g] === num){
+            occ += 1;
+        }
+    }
+    answer2 += num * occ;
+});
+
+console.log(`Answer 2 is ${answer2}`)
