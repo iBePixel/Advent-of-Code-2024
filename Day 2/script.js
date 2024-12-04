@@ -1057,133 +1057,63 @@ console.log(result);
 let result2 = 0;
 split = input.split(/\r?\n/g);
 
-let evaluate = function (a, b, direction) {
-  if (direction === "up" && a < b && b - a < 4) {
-    return true;
-  } else if (direction === "down" && a > b && a - b < 4) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
 let checkDirection = function (a, b) {
-  if (a < b && b - a < 4) {
+  if (a < b ) {
     return "up";
-  } else if (a > b && a - b < 4) {
+  } else if (a > b) {
     return "down";
   } else {
     return "invalid";
   }
 };
 
-split.forEach((row) => {
-  let nums = row.split(" ");
-  let direction = "";
-  let failsafe = false;
 
-  for (let i = 0; i < nums.length; i++) {
+let evaluate = function (arr) {
+  num1 = parseInt(arr[0]);
+  num2 = parseInt(arr[1]);
+  let direction = checkDirection(num1, num2) 
+  valid = true; 
+  
+  for (let i = 0; i < arr.length -1; i++){
     let g = i + 1;
-    let num1 = parseInt(nums[i]);
-    let num2 = parseInt(nums[g]);
-    console.log("length", nums.length);
+    num1 = parseInt(arr[i]);
+    num2 = parseInt(arr[g]);
 
-    if (i == 0) {
-      direction = checkDirection(num1, num2);
-      let temp1 = parseInt(nums[i+1])
-      let temp2 = parseInt(nums[g+1])
+    if (direction === "up" && num1 < num2 && num2 - num1 < 4) {
+      
+    } else if (direction === "down" && num1 > num2 && num1 - num2 < 4) {
 
-      let altDirection = checkDirection((temp1), (temp2))
-      console.log(direction, num1, num2);
-      console.log(altDirection)
-      if (direction === "invalid" || direction != altDirection) {
-        let tnum1 = parseInt(nums[i + 1]);
-        let tnum2 = parseInt(nums[g + 1]);
-        let ignoreFirstNum = checkDirection(tnum1, tnum2);
-        console.log("Ignoring first num ", ignoreFirstNum);
-        if (ignoreFirstNum === "invalid") {
-          console.log("first number not problematic");
-          console.log(nums, "before");
-          nums.splice(g, 1);
-          console.log(nums, "after", nums[i], nums[g]);
-          num1 = parseInt(nums[i]);
-          num2 = parseInt(nums[g]);
-          direction = checkDirection(num1, num2);
-          if (direction === "invalid") {
-            i = nums.length;
-            failsafe = false;
-            console.log(nums, "second failure");
-            break;
-          } else {
-            failsafe = true;
-            console.log("1 fail (2nd no), continuing", direction);
-          }
-        } else {
-          console.log(nums, "before");
-          nums.splice(i, 1);
-          console.log(nums, "after", nums[i], nums[g]);
-          num1 = parseInt(nums[i]);
-          num2 = parseInt(nums[g]);
-          direction = checkDirection(num1, num2);
-          if (direction === "invalid") {
-            i = nums.length;
-            failsafe = false;
-            console.log(nums, "invalid");
-            break;
-          } else {
-            failsafe = true;
-            console.log("1 fail (first no), continuing", direction);
-          }
-        }
-      }
-      console.log(nums, direction, "pass");
-    } else if (g < nums.length - 1) {
-      if (
-        evaluate(num1, num2, direction) === false) {
-        if (failsafe == true) {
-          i = nums.length;
-          failsafe = false;
-          console.log(nums, "invalid", num1, num2, "next row");
-          break;
-        } else {
-          console.log(nums, "before", num1, num2);
-          nums.splice(g, 1);
-          num2 = parseInt(nums[g]);
-          console.log(nums, "after", num1, num2);
-          test = evaluate(num1, num2, direction);
-          if (test === false) {
-            i = nums.length;
-            failsafe = false;
-            console.log(nums, "invalid");
-            break;
-          } else {
-            console.log('OK after failure')
-            failsafe = true;
-            i-=1;
-          }
-        }
-      }
-    } else if (g == nums.length -1 ) {
-      if (evaluate(num1, num2, direction) === false) {
-        if (failsafe === false) {
-          console.log("successful ignoring last char");
-          result2 += 1;
-          console.log(nums);
-          console.log("end length", nums.length);
-        } else {
-          console.log(nums, "invalid at end");
-          failsafe = false;
-          i = nums.length;
-        }
-      }
-      else {
-        console.log("successful");
-        result2 += 1;
-        console.log(nums);
-        console.log("end length", nums.length);
-      }
+    } else {
+      valid =  false;
     }
   }
-});
+  return valid;
+};
 
-console.log(result2);
+
+split.forEach((row) => {
+  let arr = row.split(' ');
+  valid = true
+  for(let i = 0; i < arr.length; i++){
+    if (!evaluate(arr)) {
+      let tempArr = arr.toSpliced(i, 1);
+      if(!evaluate(tempArr)){
+        valid = false; 
+      }
+      else {
+        i = arr.length;
+        result2 += 1;
+        return valid;
+      }
+    }
+    else {
+      i = arr.length;
+      result2 += 1;
+      return valid;
+    }
+  }
+  return valid;
+  
+})
+
+  console.log(result2);
