@@ -2,6 +2,8 @@ const fs = require("fs");
 const input = fs.readFileSync("input.txt", )
 let sample = input.toString()
 let split = sample.split(/\r?\n/g);
+const includesAny = (arr, values) => values.some(v => arr.includes(v));
+
 
 let counter = 0;
 let letterX = []
@@ -24,7 +26,7 @@ for (let i = 0; i < split.length; i++){
             letterX.push([i,f])
         }
         else if(letters[f] === 'M'){
-            letterM.push([i.f])
+            letterM.push([i,f])
         }
         else if(letters[f] === 'A') {
             letterA.push([i,f])
@@ -35,5 +37,25 @@ for (let i = 0; i < split.length; i++){
     }
 }
 
+let down = function (num1, num2){
+    row = num1 + 1
 
-console.log(letterX);
+    if (includesAny(letterM, [row, num2])){
+        return true;
+        console.log(letterX[num1][num2], console.log([row][num2]))
+    }
+}
+
+ 
+for (let j = 0; j < letterX.length; j++){
+    let row = letterX[0]
+    let indx = letterX[1]
+    console.log(down(row, indx));
+
+}
+
+
+
+//console.log(letterX[0][1]);
+
+//console.log(letterM)
