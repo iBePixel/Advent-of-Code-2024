@@ -1,7 +1,11 @@
 const fs = require("fs");
 const input = fs.readFileSync("input.txt");
+const input2 = fs.readFileSync("sample.txt")
+let sample2 = input2.toString()
+
 let sample = input.toString();
-let split = sample.split(/\r?\n/g);
+//let split = sample.split(/\r?\n/g);
+let split = sample2.split(/\r?\n/g);
 //const includesAny = (arr, values) => values.some(v => arr.includes(v));
 
 let counter = 0;
@@ -189,7 +193,7 @@ let checkXMasDown = function (num1, num2) {
   if (upIndx2 <= 139 && row <= 137 && split[row][upIndx2] === "M") {
     if (split[rowMid][indxMid] === "A") {
       if (split[lowRow][lowIndx1] === "M" && split[lowRow][lowIndx2] === "S") {
-        //console.log(num1, num2);
+        console.log('down', num1, num2);
         counter2 += 1;
         return true;
       }
@@ -198,7 +202,7 @@ let checkXMasDown = function (num1, num2) {
   else if (upIndx2 <= 139 && row <= 137 && split[row][upIndx2] === "S") {
     if (split[rowMid][indxMid] === "A") {
       if (split[lowRow][lowIndx1] === "M" && split[lowRow][lowIndx2] === "S") {
-        //console.log(num1, num2, 'criss');
+        console.log(num1, num2, 'Down - criss', num1, num2);
         counter2 += 1;
         return true;
       }
@@ -210,7 +214,7 @@ let checkXMasDown = function (num1, num2) {
         lowIndx1 = num2 - 2;
         lowIndx2 = num2;
         if (split[lowRow][lowIndx1] === "M" && split[lowRow][lowIndx2] === "S"){
-            console.log(num1,num2, 'backwards');
+            console.log(num1,num2, 'down - backwards', num1, num2);
             counter2 += 1;
             return true; 
         }
@@ -230,8 +234,8 @@ let checkXMasUp = function (num1, num2) {
   
     if (upIndx2 <= 139 && row >= 2 && split[row][upIndx2] === "M") {
       if (split[rowMid][indxMid] === "A") {
-        if (split[lowRow][lowIndx1] === "S" && split[lowRow][lowIndx2] === "M") {
-          //console.log(num1, num2);
+        if (split[lowRow][lowIndx1] === "S" && split[lowRow][lowIndx2] === "S") {
+          console.log('up', num1, num2);
           counter2 += 1;
           return true;
         }
@@ -240,7 +244,7 @@ let checkXMasUp = function (num1, num2) {
     else if (upIndx2 <= 139 && row >= 2 && split[row][upIndx2] === "S") {
       if (split[rowMid][indxMid] === "A") {
         if (split[lowRow][lowIndx1] === "M" && split[lowRow][lowIndx2] === "S") {
-          //console.log(num1, num2, 'criss');
+          console.log(num1, num2, 'up criss');
           counter2 += 1;
           return true;
         }
@@ -252,7 +256,7 @@ let checkXMasUp = function (num1, num2) {
           lowIndx1 = num2 - 2;
           lowIndx2 = num2;
           if (split[lowRow][lowIndx2] === "M" && split[lowRow][lowIndx1] === "S"){
-              //console.log(num1,num2, 'backwards');
+              console.log(num1,num2, 'up - backwards', num1, num2);
               counter2 += 1;
               return true; 
           }
