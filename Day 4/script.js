@@ -3,10 +3,9 @@ const input = fs.readFileSync("input.txt");
 const input2 = fs.readFileSync("sample.txt")
 let sample2 = input2.toString()
 
-let sample = input.toString();
-let split = sample.split(/\r?\n/g);
-//let split = sample2.split(/\r?\n/g);
-//const includesAny = (arr, values) => values.some(v => arr.includes(v));
+let data = input.toString();
+let split = data.split(/\r?\n/g);
+
 
 let counter = 0;
 let letterX = [];
