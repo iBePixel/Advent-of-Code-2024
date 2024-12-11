@@ -2,13 +2,15 @@ const fs = require("fs");
 const input = fs.readFileSync("input.txt");
 const sample = fs.readFileSync("sample.txt")
 
-let data = input.toString();
+let data = sample.toString();
 data = data.trim();
 data = data.split(/\r\n/g)
 let pairs = []
 let strings = []
 let pages = []
-result = 0;
+let wrongPages = []
+let result = 0;
+let star2 = 0
 
 data.forEach(string => {
     if (string.includes('|')) {
@@ -35,9 +37,13 @@ pairs.forEach(pair => {
             let i = pages[a].indexOf(num1);
             let g = pages[a].indexOf(num2);
             if (i > g){
+                pages[a][i] = num2;
+                pages[a][g] = num1
+                wrongPages.push(pages[a])
                 pages.splice(a, 1)
             }
         }
+        
     }
     
 })
@@ -48,5 +54,14 @@ pages.forEach( arr => {
     result += num;
 })
 
+wrongPages.forEach( arr => {
+    let midNum = ((arr.length - 1) / 2)
+    num = parseInt(arr[midNum])
+    star2 += num;
+})
 
 console.log(result)
+
+console.log(wrongPages)
+
+console.log(star2)
