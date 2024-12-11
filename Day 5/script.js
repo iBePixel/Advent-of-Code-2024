@@ -7,6 +7,8 @@ data = data.trim();
 data = data.split(/\r\n/g)
 let pairs = []
 let strings = []
+let pages = []
+result = 0;
 
 data.forEach(string => {
     if (string.includes('|')) {
@@ -18,18 +20,33 @@ data.forEach(string => {
     
 });
 
+
+
+strings.forEach(line => {
+    pages.push(line.split(','))
+})
+
 pairs.forEach(pair => {
     let split = pair.split('|')
     let num1 = split[0]
     let num2 = split[1]
-    strings.forEach(list => {
-        let separate = list.split(',')
-        if (list.includes(num1) && list.includes(num2)){
-            console.log(separate, num1, num2)
-            let i = separate.indexOf(num1);
-            let f = separate.indexOf(num2);
-            console.log(i, f)
+    for (let a = 0; a <pages.length; a++){
+        if(pages[a].includes(num1) && pages[a].includes(num2)){
+            let i = pages[a].indexOf(num1);
+            let g = pages[a].indexOf(num2);
+            if (i > g){
+                pages.splice(a, 1)
+            }
         }
-    })
+    }
+    
 })
 
+pages.forEach( arr => {
+    let midNum = ((arr.length - 1) / 2)
+    num = parseInt(arr[midNum])
+    result += num;
+})
+
+
+console.log(result)
