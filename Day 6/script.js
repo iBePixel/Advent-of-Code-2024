@@ -57,7 +57,7 @@ for (i = 0; i < 10000; i++){
         }
     }
     else if(direction === 'down'){
-        if (r + 1 > 1000){
+        if (r + 1 > 130){
             i = 10000;
         }
         else if(data[r + 1][ind] !== '#'){
